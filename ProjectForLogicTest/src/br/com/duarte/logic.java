@@ -1,5 +1,10 @@
 package br.com.duarte;
 
+import br.com.duarte.models.BlockedProposal;
+import br.com.duarte.models.Coordinates;
+import br.com.duarte.models.PointCoordinates;
+import br.com.duarte.models.Talhoes;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -20,11 +25,39 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class logic {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException {
-        String valor = "-21.0342130";
-        doConvertToGMS(Double.parseDouble(valor));
+        System.out.println("Inicio");
+        // Criando Coordenadas
+        Coordinates coordinates = new Coordinates();
+        coordinates.setLatitude("1");
+        coordinates.setLongitude("1");
+
+        // Criando Ponto com Coordenadas
+        PointCoordinates pointCoordinates = new PointCoordinates();
+        HashMap<Integer, Coordinates> pointCoordinate = new HashMap<>();
+        pointCoordinate.put(1, coordinates);
+        pointCoordinates.setCoordinates(pointCoordinate);
+
+        // Criando Talhoes com Ponto e Coordenadadas
+        Talhoes talhoes = new Talhoes();
+        HashMap<Integer, PointCoordinates> talhao = new HashMap<>();
+        talhao.put(1, pointCoordinates);
+        talhoes.setTalhoes(talhao);
+
+        // Criando Proposta
+        BlockedProposal blockedProposal = new BlockedProposal();
+        blockedProposal.setOperacion(1);
+        blockedProposal.setPoliza(1);
+        blockedProposal.setCpfCnpj("11111111");
+        blockedProposal.setEndosso(1);
+        blockedProposal.setTalhoes(talhoes);
+        System.out.println("Fim");
+
+
     }
 
     private static void doConvertToGMS(double valor){
