@@ -1,36 +1,153 @@
 package br.com.duarte;
 
-import br.com.duarte.models.BlockedProposal;
-import br.com.duarte.models.Coordinates;
-import br.com.duarte.models.PointCoordinates;
-import br.com.duarte.models.Talhoes;
+import br.com.duarte.dto.BrainLoginDTO;
+import br.com.duarte.models.Bjrr29;
+import br.com.duarte.models.BlockedProposalBrain;
+import br.com.duarte.models.CoordenadasBrain;
+import br.com.duarte.models.Talhao;
+import br.com.duarte.models.brainTeste.BlockedProposal;
+import br.com.duarte.models.brainTeste.Coordinates;
+import br.com.duarte.models.brainTeste.PointCoordinates;
+import br.com.duarte.models.brainTeste.Talhoes;
 
+import javax.net.ssl.*;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.net.URL;
 import java.net.URLConnection;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.*;
 
 public class logic {
-    public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException {
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException, ParseException {
         System.out.println("Inicio");
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
+        System.out.println(dateFormat.format(calendar.getTime()));
+
+        System.out.println("FIM");
+    }
+
+    private static void getTempoCorrido(){
+        Instant start = Instant.now();
+        for(int i = 0; i < 10; i++){
+
+        }
+        Instant end = Instant.now();
+        Duration timeElapsed = Duration.between(start, end);
+        System.out.println("Time taken: "+ timeElapsed.toMillis() +" milliseconds");
+    }
+
+    private static void getTesteOrderObject(){
+        BlockedProposalBrain blockedProposalBrain = new BlockedProposalBrain();
+        blockedProposalBrain.setProposta(1);
+        blockedProposalBrain.setCpfcnpj("11111");
+        blockedProposalBrain.setEndosso(1);
+
+        List<Talhao> talhaoList = new ArrayList<>();
+        List<Bjrr29> bjrr29List = getBjrr29List();
+        int[] talhoesArray = getBjrr29TalhoesList();
+
+        for(int talhao: talhoesArray){
+            List<CoordenadasBrain> coordenadasBrainList = new ArrayList<>();
+            for(Bjrr29 bjrr29 : bjrr29List) {
+                if(bjrr29.getTalhao() == talhao){
+                    CoordenadasBrain coordenadasBrain = new CoordenadasBrain();
+                    coordenadasBrain.setPonto(bjrr29.getPonto());
+                    coordenadasBrain.setLatitude(bjrr29.getLatitude());
+                    coordenadasBrain.setLongitude(bjrr29.getLongitude());
+                    coordenadasBrainList.add(coordenadasBrain);
+                }
+            }
+            Talhao talhaoBrain = new Talhao();
+            talhaoBrain.setTalhao(talhao);
+            talhaoBrain.setCoordenadas(coordenadasBrainList);
+            talhaoList.add(talhaoBrain);
+        }
+
+        blockedProposalBrain.setTalhoes(talhaoList);
+    }
+
+    private static int[] getBjrr29TalhoesList(){
+        int[] talhoes = {1,2};
+        return talhoes;
+    }
+
+    private static List<Bjrr29> getBjrr29List(){
+        Bjrr29 umUm = new Bjrr29();
+        umUm.setOperacion(1);
+        umUm.setTalhao(1);
+        umUm.setPonto(1);
+        umUm.setLatitude("1");
+        umUm.setLongitude("-1");
+
+        Bjrr29 umDois = new Bjrr29();
+        umDois.setOperacion(1);
+        umDois.setTalhao(1);
+        umDois.setPonto(2);
+        umDois.setLatitude("2");
+        umDois.setLongitude("-2");
+
+        Bjrr29 doisUm = new Bjrr29();
+        doisUm.setOperacion(1);
+        doisUm.setTalhao(2);
+        doisUm.setPonto(1);
+        doisUm.setLatitude("21");
+        doisUm.setLongitude("-21");
+
+        List<Bjrr29> list = new ArrayList<>();
+        list.add(umUm);
+        list.add(umDois);
+        list.add(doisUm);
+        return list;
+    }
+
+    private static void createBlockedBrainTesteUm(){
+        BlockedProposalBrain blockedProposalBrain = new BlockedProposalBrain();
+        blockedProposalBrain.setProposta(1);
+        blockedProposalBrain.setCpfcnpj("11111");
+        blockedProposalBrain.setEndosso(1);
+
+        // Criando Lista de Coordenadas
+        List<CoordenadasBrain> coordenadasBrainList = new ArrayList<>();
+
+        CoordenadasBrain coordenadasBrainUm = new CoordenadasBrain();
+        coordenadasBrainUm.setPonto(1);
+        coordenadasBrainUm.setLatitude("1111");
+        coordenadasBrainUm.setLongitude("-1111");
+        coordenadasBrainList.add(coordenadasBrainUm);
+
+        CoordenadasBrain coordenadasBrainDois = new CoordenadasBrain();
+        coordenadasBrainDois.setPonto(2);
+        coordenadasBrainDois.setLatitude("2222");
+        coordenadasBrainDois.setLongitude("-2222");
+        coordenadasBrainList.add(coordenadasBrainDois);
+
+        // --- Criando Lista de Talhoes
+        List<Talhao> talhaoList = new ArrayList<>();
+
+        Talhao talhao = new Talhao();
+        talhao.setTalhao(1);
+        talhao.setCoordenadas(coordenadasBrainList);
+
+        talhaoList.add(talhao);
+
+        blockedProposalBrain.setTalhoes(talhaoList);
+    }
+
+    private static void createBlockedProposal(){
         // Criando Coordenadas
         Coordinates coordinates = new Coordinates();
         coordinates.setLatitude("1");
@@ -55,9 +172,6 @@ public class logic {
         blockedProposal.setCpfCnpj("11111111");
         blockedProposal.setEndosso(1);
         blockedProposal.setTalhoes(talhoes);
-        System.out.println("Fim");
-
-
     }
 
     private static void doConvertToGMS(double valor){

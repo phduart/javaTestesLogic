@@ -1,4 +1,4 @@
-package br.com.duarte.models;
+package br.com.duarte.models.brainTeste;
 
 import java.util.HashMap;
 
