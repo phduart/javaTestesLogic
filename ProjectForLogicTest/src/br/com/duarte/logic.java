@@ -9,6 +9,8 @@ import br.com.duarte.models.brainTeste.BlockedProposal;
 import br.com.duarte.models.brainTeste.Coordinates;
 import br.com.duarte.models.brainTeste.PointCoordinates;
 import br.com.duarte.models.brainTeste.Talhoes;
+import br.com.duarte.xirr.Transaction;
+import br.com.duarte.xirr.Xirr;
 
 import javax.net.ssl.*;
 import java.io.IOException;
@@ -28,16 +30,36 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 
+
 public class logic {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException, ParseException {
         System.out.println("Inicio");
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, -1);
-        System.out.println(dateFormat.format(calendar.getTime()));
+        getXirr();
 
         System.out.println("FIM");
+    }
+
+    private static void getXirr(){
+        System.out.println("------ INICIO PROCESSO ------");
+        double rate = new Xirr(
+                new Transaction(96526.86, "2022-05-03"),
+                new Transaction(-98.139, "2022-05-03"),
+                new Transaction(-10912.5, "2022-06-03"),
+                new Transaction( -10805.3, "2022-07-03"),
+                new Transaction( -10724.5, "2022-08-03"),
+                new Transaction( -10643.7, "2022-09-03"),
+                new Transaction( -10562.9, "2022-10-03"),
+                new Transaction( -10482.1, "2022-11-03"),
+                new Transaction( -10401.4, "2022-12-03"),
+                new Transaction( -10320.6, "2023-01-03"),
+                new Transaction( -10239.8, "2023-02-03"),
+                new Transaction( -10104, "2023-03-03")
+        ).xirr();
+        System.out.println(rate);
+        double d = (double) (Math.round(rate*10000.0)/10000.0);
+        System.out.println(d);
+        System.out.println("------ FIM PROCESSO ------");
     }
 
     private static void getTempoCorrido(){
