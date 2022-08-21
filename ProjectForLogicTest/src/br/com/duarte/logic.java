@@ -1,10 +1,10 @@
 package br.com.duarte;
 
-import br.com.duarte.dto.BrainLoginDTO;
 import br.com.duarte.models.Bjrr29;
 import br.com.duarte.models.BlockedProposalBrain;
 import br.com.duarte.models.CoordenadasBrain;
 import br.com.duarte.models.Talhao;
+import br.com.duarte.models.brad.Prazos;
 import br.com.duarte.models.brainTeste.BlockedProposal;
 import br.com.duarte.models.brainTeste.Coordinates;
 import br.com.duarte.models.brainTeste.PointCoordinates;
@@ -32,12 +32,57 @@ public class logic {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException, ParseException {
         System.out.println("Inicio");
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, -1);
-        System.out.println(dateFormat.format(calendar.getTime()));
+        getTesteHashMapLacuna();
 
         System.out.println("FIM");
+    }
+
+    private static void getTesteHashMapLacuna(){
+        ArrayList<Prazos> list = new ArrayList<Prazos>();
+        HashMap<String, String> hashPrazosFim = new HashMap<String, String>();
+
+        Prazos prazosUm = new Prazos();
+        prazosUm.setIdPlano(1);
+        prazosUm.setPrazoInicio(1);
+        prazosUm.setPrazoFim(4);
+        list.add(prazosUm);
+
+        Prazos prazosDois = new Prazos();
+        prazosDois.setIdPlano(1);
+        prazosDois.setPrazoInicio(5);
+        prazosDois.setPrazoFim(10);
+        list.add(prazosDois);
+
+        System.out.println("teste");
+
+        for(Prazos prazos : list){
+            if(prazos.getIdPlano() == 1) {
+                hashPrazosFim.put("1", String.valueOf(prazos.getPrazoFim()));
+            };
+        }
+
+        System.out.println("teste");
+        if(hashPrazosFim.containsKey("1")){
+            int prazoFimInt = Integer.parseInt(hashPrazosFim.get("1"));
+
+            if(11 == prazoFimInt+1){
+                System.out.println("é igual");
+            }
+        }
+
+        System.out.println("teste");
+
+
+    }
+
+    private static void getDataAnterior(){
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, -45);
+        System.out.println(dateFormat.format(calendar.getTime()));
+        calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, 0);
+        System.out.println(dateFormat.format(calendar.getTime()));
     }
 
     private static void getTempoCorrido(){
