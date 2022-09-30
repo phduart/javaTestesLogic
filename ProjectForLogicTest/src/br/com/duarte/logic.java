@@ -32,9 +32,24 @@ public class logic {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException, ParseException {
         System.out.println("Inicio");
 
-        getTesteHashMapLacuna();
+        getMeses(3);
 
         System.out.println("FIM");
+    }
+
+    private static void getMeses(int meses){
+        List<String> competencias = new ArrayList<>();
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+
+        for(int i = 0; i < meses; i++){
+            calendar.add(Calendar.MONTH, -1);
+            competencias.add(dateFormat.format(calendar.getTime()));
+            System.out.println(dateFormat.format(calendar.getTime()));
+        }
+        System.out.println(competencias.size());
+
     }
 
     private static void getTesteHashMapLacuna(){
@@ -76,10 +91,11 @@ public class logic {
     }
 
     private static void getDataAnterior(){
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, -45);
+        calendar.add(Calendar.MONTH, -1);
         System.out.println(dateFormat.format(calendar.getTime()));
+
         calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, 0);
         System.out.println(dateFormat.format(calendar.getTime()));
