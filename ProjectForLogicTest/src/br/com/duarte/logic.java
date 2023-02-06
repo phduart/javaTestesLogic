@@ -26,15 +26,85 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class logic {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException, ParseException {
         System.out.println("Inicio");
-
-        getMeses(3);
-
+        
         System.out.println("FIM");
+    }
+
+    private static BigDecimal converterTaxaDeJurosDia(){
+        // receber taxaMes = 0.79741401
+        BigDecimal taxaMes = new BigDecimal("0.79741401");
+        System.out.println("taxa mes " + taxaMes);
+
+        // tratando taxaMes = taxaMes / 100
+        taxaMes = taxaMes.divide(new BigDecimal("100"));
+
+        // CALCULO ---- (((1+ taxa) ^ (1/30)) - 1) * 100
+        // x = (1+ taxa)
+        BigDecimal taxaDia = BigDecimal.ONE.add(taxaMes).setScale(8, RoundingMode.FLOOR);
+        System.out.println("x = (1+taxa) = " + taxaDia);
+
+        // y = (1/d)
+        BigDecimal potencia = BigDecimal.ONE.divide(new BigDecimal("30"), 8, RoundingMode.FLOOR);
+        System.out.println("y = (1/360) = " +  potencia);
+
+        double taxaDouble = Double.parseDouble(taxaDia.toString());
+        double potenciaDouble = Double.parseDouble(potencia.toString());
+
+        // z = x^y
+        double resultCalcTaxa = Math.pow(taxaDouble, potenciaDouble);
+        System.out.println("z = x^y = " + resultCalcTaxa);
+
+        // a = (z - 1) * 100
+        double taxaJurosDia = (resultCalcTaxa - 1) * 100;
+        BigDecimal taxaJurosDecimal = new BigDecimal(taxaJurosDia);
+        System.out.println("a = (z - 1) * 100 = " + taxaJurosDecimal  + "%");
+
+        return taxaJurosDecimal;
+    }
+
+    public static void descontoCompostoDia(float valor, float taxa, int dias){
+        float num = valor;
+        System.out.println("R$" + num);
+
+        for(int i = 0; i < dias; i++){
+            num = num - (num/100) * taxa;
+            System.out.println("R$" + num);
+        }
+    }
+
+    public static float descontoComposto(float nominal, float taxa, int tempo)
+    {
+        return (float)(nominal * (1 - (Math.pow((1-taxa), tempo))));
+    }
+
+
+    private static void getCalculation(double num1, double num2, String operator){
+
+        switch(operator) {
+            case "+":
+                System.out.println(num1 + num2);
+                break;
+            case "-":
+                System.out.println(num1 - num2);
+                break;
+            case "*":
+                System.out.println(num1 * num2);
+                break;
+            case "/":
+                System.out.println(num1 / num2);
+                break;
+        }
+
+    }
+
+    private static void setText(String string){
+        System.out.println(string);
     }
 
     private static void getMeses(int meses){
