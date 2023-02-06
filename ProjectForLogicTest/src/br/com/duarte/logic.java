@@ -9,6 +9,7 @@ import br.com.duarte.models.brainTeste.BlockedProposal;
 import br.com.duarte.models.brainTeste.Coordinates;
 import br.com.duarte.models.brainTeste.PointCoordinates;
 import br.com.duarte.models.brainTeste.Talhoes;
+import br.com.duarte.models.perso.Node;
 
 import javax.net.ssl.*;
 import java.io.IOException;
@@ -32,8 +33,53 @@ import java.util.*;
 public class logic {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException, ParseException {
         System.out.println("Inicio");
-        
+
+
+        Node nodes = new Node();
+        List<String> nodesValues = new ArrayList<>();
+        nodesValues.add("27");
+        nodesValues.add("3");
+        nodesValues.add("2");
+        nodesValues.add("7");
+        nodesValues.add("47");
+        nodesValues.add("4");
+        nodesValues.add("24");
+        nodesValues.add("6");
+        nodesValues.add("36");
+        System.out.println(nodesValues);
+
+        List<String> nodesValuesToValidate = new ArrayList<>();
+        List<String> nodesValuesToCompare = new ArrayList<>();
+        // for para pegar os valores duplos
+        for (String value : nodesValues){
+            if(value.length() > 1 ){
+                nodesValuesToValidate.add(value);
+            } else {
+                nodesValuesToCompare.add(value);
+            }
+        }
+
+        // Compare value each with split
+        for (String value : nodesValuesToValidate) {
+            for(int i = 0; i < value.length(); i++){
+                if(!compareChainChar(String.valueOf(value.charAt(i)), nodesValuesToCompare)){
+                    System.out.println("Error on validate!");
+                } else {
+                    System.out.println("Success!");
+                }
+            }
+        }
+
+
         System.out.println("FIM");
+    }
+
+    private static boolean compareChainChar(String valueToValidate, List<String> listToCompare){
+        if(listToCompare.contains(valueToValidate)){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private static BigDecimal converterTaxaDeJurosDia(){
