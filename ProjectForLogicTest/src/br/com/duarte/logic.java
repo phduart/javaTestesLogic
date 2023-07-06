@@ -34,6 +34,19 @@ public class logic {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException, ParseException {
         System.out.println("Inicio");
 
+        char[] materias = {'H', 'M', 'P'};
+        String whereMaterias = " ";
+        for(char materia : materias) {
+            whereMaterias += "'" + materia + "', ";
+        }
+        whereMaterias = whereMaterias.substring(0, whereMaterias.length()-2);
+        System.out.println(whereMaterias);
+
+        System.out.println("FIM");
+    }
+
+    private static void testeComparator() {
+
 
         Node nodes = new Node();
         List<String> nodesValues = new ArrayList<>();
@@ -46,6 +59,8 @@ public class logic {
         nodesValues.add("24");
         nodesValues.add("6");
         nodesValues.add("36");
+
+        nodes.setValue(nodesValues);
         System.out.println(nodesValues);
 
         List<String> nodesValuesToValidate = new ArrayList<>();
@@ -69,9 +84,6 @@ public class logic {
                 }
             }
         }
-
-
-        System.out.println("FIM");
     }
 
     private static boolean compareChainChar(String valueToValidate, List<String> listToCompare){
