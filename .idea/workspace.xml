@@ -2,14 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e02eaa06-970b-4fef-a2ab-4250c70ed3fd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectForLogicTest/.idea/runConfigurations.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectForLogicTest/out/production/ProjectForLogicTest/br/com/duarte/logic$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectForLogicTest/out/production/ProjectForLogicTest/br/com/duarte/logic$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectForLogicTest/out/production/ProjectForLogicTest/br/com/duarte/logic$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectForLogicTest/out/production/ProjectForLogicTest/br/com/duarte/logic$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectForLogicTest/out/production/ProjectForLogicTest/br/com/duarte/logic.class" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectForLogicTest/out/production/ProjectForLogicTest/br/com/duarte/logic.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectForLogicTest/src/br/com/duarte/logic.java" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectForLogicTest/src/br/com/duarte/logic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectSpringForTest/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/projectSpringForTest/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projectSpringForTest/src/main/java/br/com/projectSpringForTest/ProjectSpringForTestApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/projectSpringForTest/src/main/java/br/com/projectSpringForTest/ProjectSpringForTestApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,20 +17,25 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="20h4zB49RtMqj61B6UAIOCKRYPH" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ProjectForLogicTest" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.notifications" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Paulo/Documents/GitHub/javaTestesLogic&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  }
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

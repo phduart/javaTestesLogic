@@ -30,19 +30,39 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
 
+
 public class logic {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException, ParseException {
         System.out.println("Inicio");
 
-        char[] materias = {'H', 'M', 'P'};
-        String whereMaterias = " ";
-        for(char materia : materias) {
-            whereMaterias += "'" + materia + "', ";
-        }
-        whereMaterias = whereMaterias.substring(0, whereMaterias.length()-2);
-        System.out.println(whereMaterias);
+        validaSeDataMenor();
 
         System.out.println("FIM");
+    }
+
+    public static void validaSeDataMenor() throws ParseException {
+        String dataGuia = "25/12/2023";
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        Date dataInfoGuia = dateFormat.parse(dataGuia);
+        Date dtAtual = getData(new Date());
+
+        if(dataInfoGuia.before(dtAtual)){
+            System.out.println("Data é menor!");
+        } else {
+            System.out.println("Data válida");
+        }
+
+    }
+
+    public static Date getData(Date aDate) {
+        final Calendar myCalendar = Calendar.getInstance();
+        myCalendar.setTime(aDate);
+        myCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        myCalendar.set(Calendar.MINUTE, 0);
+        myCalendar.set(Calendar.SECOND, 0);
+        myCalendar.set(Calendar.MILLISECOND, 0);
+        return myCalendar.getTime();
     }
 
     private static void testeComparator() {
