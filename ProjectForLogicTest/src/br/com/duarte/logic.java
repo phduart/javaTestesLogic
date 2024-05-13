@@ -22,6 +22,7 @@ import java.net.URLConnection;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,12 +31,24 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import static java.lang.String.format;
+
 
 public class logic {
-    public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException, ParseException {
+    public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException, ParseException, InterruptedException {
         System.out.println("Inicio");
 
-        validaSeDataMenor();
+        Timestamp start = new Timestamp(System.currentTimeMillis());
+
+        Thread.sleep(2);
+
+        Timestamp end = new Timestamp(System.currentTimeMillis());
+
+        // Calcula a diferença entre os timestamps
+        long elapsedTimeMillis = end.getTime() - start.getTime();
+
+        // Exibe o tempo decorrido em milissegundos
+        System.out.println("Tempo decorrido: " + elapsedTimeMillis + " milissegundos");
 
         System.out.println("FIM");
     }
@@ -251,7 +264,7 @@ public class logic {
 
     private static void getTempoCorrido(){
         Instant start = Instant.now();
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 100000; i++){
 
         }
         Instant end = Instant.now();
