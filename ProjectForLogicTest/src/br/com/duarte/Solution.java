@@ -68,23 +68,20 @@ public class Solution {
             processTaxRate(checkoutResult, taxCode);
         }
 
-
         return checkoutResult;
     }
 
-    private static CheckoutResult processSubTotal(CartItem[] cart, CheckoutResult checkoutResult){
+    private static void processSubTotal(CartItem[] cart, CheckoutResult checkoutResult){
         for (CartItem cartItem : cart) {
             String item = cartItem.item.toLowerCase();
             if (ITEM_PRICES.containsKey(item)) {
                 checkoutResult.subtotal += ITEM_PRICES.get(item) * cartItem.getCount();
             }
         }
-        return checkoutResult;
     }
 
-
-    private static CheckoutResult processDiscount(CartItem[] cart, CheckoutResult checkoutResult,
-                                                  String discountCode){
+    private static void processDiscount(CartItem[] cart, CheckoutResult checkoutResult,
+                                        String discountCode){
         switch (discountCode) {
             case "tenpercentoff":
                 checkoutResult.discount = checkoutResult.subtotal * 0.10;
@@ -105,16 +102,13 @@ public class Solution {
                 break;
         }
 
-        return checkoutResult;
     }
 
-    private static CheckoutResult processTaxRate(CheckoutResult checkoutResult, String taxCode){
+    private static void processTaxRate(CheckoutResult checkoutResult, String taxCode){
         double taxQtd = checkoutResult.subtotal * (getTaxRate(taxCode) / 100.0);
         taxQtd = Math.round(taxQtd * 100.0) / 100.0;
         checkoutResult.tax = taxQtd;
         checkoutResult.total = checkoutResult.subtotal + checkoutResult.tax;
-
-        return checkoutResult;
     }
 
     private static class CartItem {

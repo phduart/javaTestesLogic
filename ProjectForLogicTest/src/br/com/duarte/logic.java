@@ -38,17 +38,7 @@ public class logic {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException, ParseException, InterruptedException {
         System.out.println("Inicio");
 
-        Timestamp start = new Timestamp(System.currentTimeMillis());
 
-        Thread.sleep(2);
-
-        Timestamp end = new Timestamp(System.currentTimeMillis());
-
-        // Calcula a diferença entre os timestamps
-        long elapsedTimeMillis = end.getTime() - start.getTime();
-
-        // Exibe o tempo decorrido em milissegundos
-        System.out.println("Tempo decorrido: " + elapsedTimeMillis + " milissegundos");
 
         System.out.println("FIM");
     }
