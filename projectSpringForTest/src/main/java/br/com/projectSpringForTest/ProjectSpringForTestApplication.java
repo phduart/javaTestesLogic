@@ -1,53 +1,88 @@
 package br.com.projectSpringForTest;
-
-import br.com.projectSpringForTest.entity.Ptrr01;
-import br.com.projectSpringForTest.model.EmployeeDTO;
-import br.com.projectSpringForTest.model.EmployeesDTO;
-import br.com.projectSpringForTest.repository.impl.Ptrr01Repository;
-import org.decampo.xirr.Transaction;
-import org.decampo.xirr.Xirr;
+import br.com.projectSpringForTest.GNRE.retornoConsultaConfig.TConfigUf;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.*;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
-import java.util.List;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.StringReader;
+import java.io.StringWriter;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
 public class ProjectSpringForTestApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectSpringForTestApplication.class, args);
 	}
 
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
-
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("------ INICIO PROCESSO ------");
-		double rate = new Xirr(
-				new Transaction(96526.86, "2022-05-03"),
-				new Transaction(-98.139, "2022-05-03"),
-				new Transaction(-10912.5, "2022-06-03"),
-				new Transaction( -10805.3, "2022-07-03"),
-				new Transaction( -10724.5, "2022-08-03"),
-				new Transaction( -10643.7, "2022-09-03"),
-				new Transaction( -10562.9, "2022-10-03"),
-				new Transaction( -10482.1, "2022-11-03"),
-				new Transaction( -10401.4, "2022-12-03"),
-				new Transaction( -10320.6, "2023-01-03"),
-				new Transaction( -10239.8, "2023-02-03"),
-				new Transaction( -10104, "2023-03-03")
-		).xirr();
-		System.out.println(rate);
-		double d = (double) (Math.round(rate*10000.0)/10000.0);
-		System.out.println(d);
+
+		try {
+			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+			Document doc = docBuilder.newDocument();
+
+			// Cria o elemento raiz <gnr:gnreDadosMsg> sem namespace
+			Element rootElement = doc.createElement("gnr:gnreDadosMsg");
+			doc.appendChild(rootElement);
+
+			// Cria o elemento <TConsultaConfigUf> com o namespace
+			Element tConsultaConfigUf = doc.createElementNS("http://www.gnre.pe.gov.br", "TConsultaConfigUf");
+			rootElement.appendChild(tConsultaConfigUf);
+
+			// Cria o elemento <ambiente> sem namespace
+			Element ambiente = doc.createElement("ambiente");
+			ambiente.setTextContent("1");
+			tConsultaConfigUf.appendChild(ambiente);
+
+			// Cria o elemento <uf> sem namespace
+			Element uf = doc.createElement("uf");
+			uf.setTextContent("RJ");
+			tConsultaConfigUf.appendChild(uf);
+
+			// Cria o elemento <receita> sem namespace
+			Element receita = doc.createElement("receita");
+			receita.setAttribute("courier", "N");
+			receita.setTextContent("100030");
+			tConsultaConfigUf.appendChild(receita);
+
+			// Cria o elemento <tiposGnre> sem namespace
+			Element tiposGnre = doc.createElement("tiposGnre");
+			tiposGnre.setTextContent("N");
+			tConsultaConfigUf.appendChild(tiposGnre);
+
+			// Escreve o conteúdo do XML em uma string
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource source = new DOMSource(doc);
+			StringWriter writer = new StringWriter();
+			StreamResult result = new StreamResult(writer);
+			transformer.transform(source, result);
+
+			// Imprime o XML gerado
+			String xmlString = writer.toString();
+			System.out.println(xmlString);
+
+		} catch (ParserConfigurationException | TransformerException e) {
+			e.printStackTrace();
+		}
+
+
 		System.out.println("------ FIM PROCESSO ------");
 	}
 
