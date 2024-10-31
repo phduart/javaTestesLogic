@@ -38,7 +38,9 @@ public class logic {
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException, KeyManagementException, ParseException, InterruptedException {
         System.out.println("Inicio");
 
+        FirefoxControl control = new FirefoxControl();
 
+        control.moverArquivo();
 
         System.out.println("FIM");
     }

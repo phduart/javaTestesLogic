@@ -6,7 +6,11 @@ import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Clipboard;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 public class FirefoxControl {
@@ -295,6 +299,34 @@ public class FirefoxControl {
         StringSelection stringSelection = new StringSelection(scriptGerarPdf);
         clipboard.setContents(stringSelection, null);
         controle.copiaColaEnter();
+    }
+
+    public void moverArquivo(){
+        // Caminho da pasta de origem (Downloads) e da pasta de destino
+        String origem = System.getProperty("user.home") + "\\Downloads";
+        String destino = "F:\\VETOR-ENV";
+        String nomeArquivo = "RelatorioDAR.pdf";
+
+        File pastaDestino = new File(destino);
+        if (!pastaDestino.exists() || !pastaDestino.isDirectory()) {
+            throw new IllegalArgumentException("A pasta de destino não existe: " + destino);
+        }
+
+        // Definir o caminho completo do arquivo PDF específico
+        Path caminhoOrigem = Paths.get(origem + "\\" + nomeArquivo);
+        Path caminhoDestino = Paths.get(destino + "\\" + nomeArquivo);
+
+        // Verificar se o arquivo existe antes de tentar movê-lo
+        if (Files.exists(caminhoOrigem)) {
+            try {
+                Files.move(caminhoOrigem, caminhoDestino);
+                System.out.println("Arquivo movido com sucesso para " + caminhoDestino);
+            } catch (IOException e) {
+                System.out.println("Erro ao mover o arquivo: " + e.getMessage());
+            }
+        } else {
+            System.out.println("O arquivo " + nomeArquivo + " não foi encontrado na pasta Downloads.");
+        }
     }
 
 }
